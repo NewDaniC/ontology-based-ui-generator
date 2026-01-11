@@ -1,0 +1,96 @@
+# Node
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+.vite/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# dotenv environment variables
+.env
+.env.*
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Mac system files
+.DS_Store
+
+# Local coverage reports
+coverage/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Yarn Integrity file
+yarn.lock
+
+# VSCode settings
+.history/
+
+# JetBrains IDEs
+*.iml
+
+# Misc
+*.tmp
+*.temp
+
+# Parcel-bundler cache
+.cache/
+
+# Storybook build outputs
+out/
+storybook-static/
+
+# SASS cache
+.sass-cache/
+
+# Next.js build output
+.next/
+
+# Nuxt.js build output
+.nuxt/
+
+# Gatsby files
+.cache/
+public/
+
+# Temporary files
+*.tmp
+*.temp
+
+# React Native
+.expo/
+
+# Copilot instructions (do not version)
+.github/copilot-instructions.md
