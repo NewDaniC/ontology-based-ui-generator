@@ -16,7 +16,8 @@ import {
  * Loads an ontology into the store and returns extracted prefixes.
  */
 export async function serializeOntologies(store, url, baseIRI = 'http://example.org/base#', contentType = 'text/turtle') {
-  const response = await fetch(url);
+  const cacheBustedUrl = url.includes('?') ? `${url}&_ts=${Date.now()}` : `${url}?_ts=${Date.now()}`; // Cache-busting: force fetch to always load the latest ontology
+  const response = await fetch(cacheBustedUrl, { cache: 'no-store' });
   if (!response.ok) {
     throw new Error(`Failed to fetch ontology from ${url}: ${response.statusText}`);
   }
