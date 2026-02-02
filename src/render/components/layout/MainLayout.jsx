@@ -7,25 +7,38 @@ const { Content } = Layout;
 
 export default function MainLayout({ 
   children, 
-  layoutConfig = {},
-  views = [],
+  layoutConfig,
+  views,
   selectedView,
   onViewSelect 
 }) {
   const {
-    headerTitle = 'SmartLEM',
-    headerHeight = 64,
-    sidebarWidth = 200,
-    footerText = 'SmartLEM',
-    footerHeight = 50,
-  } = layoutConfig;
+    headerTitle,
+    headerHeight,
+    headerIsFixed,
+    sidebarWidth,
+    footerText,
+    footerHeight,
+    footerIsFixed,
+    contentAreaPadding,
+  } = layoutConfig || {};
+
+  const contentMargins = {
+    marginLeft: sidebarWidth,
+    marginTop: headerIsFixed ? headerHeight : 0,
+    marginBottom: footerIsFixed ? footerHeight : 0,
+  };
+
+  const minHeightOffset =
+    (headerIsFixed ? headerHeight : 0) + (footerIsFixed ? footerHeight : 0);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       {/* Header */}
       <HeaderComponent 
         title={headerTitle} 
-        height={headerHeight} 
+        height={headerHeight}
+        fixed={headerIsFixed}
       />
 
       <Layout>
@@ -37,16 +50,17 @@ export default function MainLayout({
           width={sidebarWidth}
           headerHeight={headerHeight}
           footerHeight={footerHeight}
+          headerIsFixed={headerIsFixed}
+          footerIsFixed={footerIsFixed}
         />
 
-        {/* Content Area */}
+        {/* Content Area (layout:ContentArea) */}
         <Content
+          data-layout="content-area"
           style={{
-            marginLeft: sidebarWidth,
-            marginTop: headerHeight,
-            marginBottom: footerHeight,
-            padding: 24,
-            minHeight: `calc(100vh - ${headerHeight}px - ${footerHeight}px)`,
+            ...contentMargins,
+            padding: contentAreaPadding,
+            minHeight: `calc(100vh - ${minHeightOffset}px)`,
             background: '#f0f2f5',
             overflow: 'auto',
           }}
@@ -58,7 +72,8 @@ export default function MainLayout({
       {/* Footer */}
       <FooterComponent 
         text={footerText} 
-        height={footerHeight} 
+        height={footerHeight}
+        fixed={footerIsFixed}
       />
     </Layout>
   );

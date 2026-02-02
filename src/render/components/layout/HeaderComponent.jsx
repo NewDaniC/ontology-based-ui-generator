@@ -2,7 +2,17 @@ import { Layout, Typography } from 'antd';
 
 const { Title } = Typography;
 
-export default function HeaderComponent({ title = 'SmartLEM', height = 64 }) {
+export default function HeaderComponent({ title, height, fixed }) {
+  const fixedStyle = fixed
+    ? {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+      }
+    : { position: 'static' };
+
   return (
     <Layout.Header
       style={{
@@ -12,11 +22,7 @@ export default function HeaderComponent({ title = 'SmartLEM', height = 64 }) {
         display: 'flex',
         alignItems: 'center',
         padding: '0 24px',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
+        ...fixedStyle,
       }}
     >
       <Title 

@@ -1,104 +1,98 @@
 import * as rdflib from 'rdflib';
-import { serializeOntologies } from '../lib/index.js';
-
-const LAYOUT_QUERIES = {
-  // Query to get the main layout structure
-  GET_LAYOUT: `
-    PREFIX layout: <http://www.cedri.com/SmartLEM-Layout#>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    SELECT ?layout ?header ?sidebar ?footer ?contentArea WHERE {
-      ?layout rdf:type layout:Layout .
-      OPTIONAL { ?layout layout:hasHeader ?header }
-      OPTIONAL { ?layout layout:hasSidebar ?sidebar }
-      OPTIONAL { ?layout layout:hasFooter ?footer }
-      OPTIONAL { ?layout layout:hasContentArea ?contentArea }
-    }
-  `,
-
-  // Query to get header properties
-  GET_HEADER: `
-    PREFIX layout: <http://www.cedri.com/SmartLEM-Layout#>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    SELECT ?header ?title ?height ?isFixed WHERE {
-      ?header rdf:type layout:Header .
-      OPTIONAL { ?header layout:hasTitle ?title }
-      OPTIONAL { ?header layout:hasHeight ?height }
-      OPTIONAL { ?header layout:isFixed ?isFixed }
-    }
-  `,
-
-  // Query to get sidebar properties
-  GET_SIDEBAR: `
-    PREFIX layout: <http://www.cedri.com/SmartLEM-Layout#>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    SELECT ?sidebar ?width ?isFixed WHERE {
-      ?sidebar rdf:type layout:Sidebar .
-      OPTIONAL { ?sidebar layout:hasWidth ?width }
-      OPTIONAL { ?sidebar layout:isFixed ?isFixed }
-    }
-  `,
-
-  // Query to get footer properties
-  GET_FOOTER: `
-    PREFIX layout: <http://www.cedri.com/SmartLEM-Layout#>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    SELECT ?footer ?text ?height ?isFixed WHERE {
-      ?footer rdf:type layout:Footer .
-      OPTIONAL { ?footer layout:hasText ?text }
-      OPTIONAL { ?footer layout:hasHeight ?height }
-      OPTIONAL { ?footer layout:isFixed ?isFixed }
-    }
-  `
-};
 
 /**
- * Runs a SPARQL SELECT query and returns results
- */
-async function runQuery(store, query, variables) {
-  return new Promise((resolve, reject) => {
-    const results = [];
-    const q = rdflib.SPARQLToQuery(query, false, store);
-    
-    store.query(q, (result) => {
-      if (result) {
-        const row = {};
-        variables.forEach(v => {
-          row[v] = result[`?${v}`]?.value || null;
-        });
-        results.push(row);
-      }
-    }, undefined, () => resolve(results));
-  });
-}
-
-/**
- * Loads the layout ontology and extracts layout configuration
+ * Loads the layout ontology and extracts layout configuration.
+ * This function is generic and works with any ontology that follows the layout pattern:
+ * - Classes: Layout, Header, Sidebar, Footer, ContentArea
+ * - Properties: hasTitle, hasHeight, hasWidth, hasText, hasPadding, isFixed
+ * The function discovers individuals dynamically by their rdf:type.
  */
 export async function loadLayoutOntology(layoutUrl = '/ontologies/SmartLEM_UI/SmartLEM-Layout.ttl') {
   const store = rdflib.graph();
   
-  console.log('Loading layout ontology:', layoutUrl);
-  await serializeOntologies(store, layoutUrl);
+  // Standard namespaces used in all layout ontologies
+  const RDF = rdflib.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+  
+  console.log('Loading layout ontology:', layoutUrl); // Console comment
+  
+  // Fetch the ontology to extract the base namespace dynamically
+  const cacheBustedUrl = layoutUrl.includes('?') ? `${layoutUrl}&_ts=${Date.now()}` : `${layoutUrl}?_ts=${Date.now()}`;
+  const response = await fetch(cacheBustedUrl, { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(`Failed to fetch layout ontology: ${response.statusText}`);
+  }
+  const turtleContent = await response.text();
+  
+  // Extract the base namespace from the ontology (from @base or @prefix layout:)
+  const baseMatch = turtleContent.match(/@base\s+<([^>]+)>/);
+  const layoutPrefixMatch = turtleContent.match(/@prefix\s+layout:\s+<([^>]+)>/);
+  const LAYOUT_NS = baseMatch?.[1] || layoutPrefixMatch?.[1] || 'http://example.org/layout#';
 
-  // Extract header config
-  const headerResults = await runQuery(store, LAYOUT_QUERIES.GET_HEADER, ['header', 'title', 'height', 'isFixed']);
-  const headerConfig = headerResults[0] || {};
+  console.log('Detected layout namespace:', LAYOUT_NS); // Console comment
+  
+  const ns = rdflib.Namespace(LAYOUT_NS);
+  
+  // Parse the ontology into the store
+  rdflib.parse(turtleContent, store, LAYOUT_NS, 'text/turtle');
 
-  // Extract sidebar config
-  const sidebarResults = await runQuery(store, LAYOUT_QUERIES.GET_SIDEBAR, ['sidebar', 'width', 'isFixed']);
-  const sidebarConfig = sidebarResults[0] || {};
-
-  // Extract footer config
-  const footerResults = await runQuery(store, LAYOUT_QUERIES.GET_FOOTER, ['footer', 'text', 'height', 'isFixed']);
-  const footerConfig = footerResults[0] || {};
-
-  return {
-    headerTitle: headerConfig.title || 'SmartLEM',
-    headerHeight: parseInt(headerConfig.height) || 64,
-    sidebarWidth: parseInt(sidebarConfig.width) || 200,
-    footerText: footerConfig.text || 'SmartLEM',
-    footerHeight: parseInt(footerConfig.height) || 50,
+  // Helper function to find an individual by its rdf:type class
+  const findIndividualByType = (className) => {
+    const classNode = ns(className);
+    const individuals = store.each(undefined, RDF('type'), classNode);
+    return individuals.length > 0 ? individuals[0] : null;
   };
+
+  // Discover individuals dynamically by their class type
+  const headerNode = findIndividualByType('Header');
+  const sidebarNode = findIndividualByType('Sidebar');
+  const footerNode = findIndividualByType('Footer');
+  const contentAreaNode = findIndividualByType('ContentArea');
+
+  // Console comment
+  console.log('Discovered Header:', headerNode?.value);
+  console.log('Discovered Sidebar:', sidebarNode?.value);
+  console.log('Discovered Footer:', footerNode?.value);
+  console.log('Discovered ContentArea:', contentAreaNode?.value);
+
+  // Extract properties from discovered individuals
+  const headerTitle = headerNode ? store.any(headerNode, ns('hasTitle')) : null;
+  const headerHeight = headerNode ? store.any(headerNode, ns('hasHeight')) : null;
+  const headerIsFixed = headerNode ? store.any(headerNode, ns('isFixed')) : null;
+  
+  const sidebarWidth = sidebarNode ? store.any(sidebarNode, ns('hasWidth')) : null;
+  
+  const footerText = footerNode ? store.any(footerNode, ns('hasText')) : null;
+  const footerHeight = footerNode ? store.any(footerNode, ns('hasHeight')) : null;
+  const footerIsFixed = footerNode ? store.any(footerNode, ns('isFixed')) : null;
+  
+  const contentAreaPadding = contentAreaNode ? store.any(contentAreaNode, ns('hasPadding')) : null;
+
+  const toBool = (value, fallback = true) => {
+    if (!value) return fallback;
+    const normalized = String(value.value).toLowerCase();
+    return normalized === 'true' || normalized === '1';
+  };
+
+  const toNumber = (value, fallback) => {
+    if (!value) return fallback;
+    const parsed = Number.parseInt(value.value, 10);
+    return Number.isNaN(parsed) ? fallback : parsed;
+  };
+
+  // Build result with generic fallback messages
+  const result = {
+    headerTitle: headerTitle?.value || 'Define layout:hasTitle in ontology',
+    headerHeight: toNumber(headerHeight, 64),
+    headerIsFixed: toBool(headerIsFixed, true),
+    sidebarWidth: toNumber(sidebarWidth, 200),
+    footerText: footerText?.value || 'Define layout:hasText in ontology',
+    footerHeight: toNumber(footerHeight, 50),
+    footerIsFixed: toBool(footerIsFixed, true),
+    contentAreaPadding: toNumber(contentAreaPadding, 24),
+  };
+
+  console.log('Final layout config:', result); // Console comment
+  return result;
 }
 
 /**
@@ -133,10 +127,10 @@ export async function discoverViews(baseDir = '/ontologies/SmartLEM_UI/') {
     // Sort views alphabetically by name
     views.sort((a, b) => a.name.localeCompare(b.name));
 
-    console.log('Views discovered from manifest:', views);
+  console.log('Views discovered from manifest:', views); // Console comment
     return views;
   } catch (error) {
-    console.error('Error discovering views:', error);
+  console.error('Error discovering views:', error); // Console comment
     return [];
   }
 }
