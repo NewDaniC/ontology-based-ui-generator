@@ -83,7 +83,6 @@ storybook-static/
 
 # Gatsby files
 .cache/
-public/
 
 # Temporary files
 *.tmp
@@ -94,3 +93,7 @@ public/
 
 # Copilot instructions (do not version)
 .github/copilot-instructions.md
+
+CLAUDE.md
+.claude
+docs/PROJECT_OVERVIEW.md

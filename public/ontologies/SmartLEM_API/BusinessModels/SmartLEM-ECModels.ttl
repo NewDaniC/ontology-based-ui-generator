@@ -1,0 +1,299 @@
+@base <http://www.cedri.com/SmartLEM-EC-Operations#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix md:  <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm:  <http://www.cedri.com/OntologyToAPI-Communications#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix excode:  <http://www.cedri.com/OntologyToAPI-ExternalCode#> .
+
+@prefix EC_Operations: <http://www.cedri.com/SmartLEM-EC-Operations#> .
+
+<http://www.cedri.com/SmartLEM-EC-Operations> rdf:type owl:Ontology ;
+                                                           owl:versionIRI <http://www.cedri.com/SmartLEM-EC-Operations/1.0.0> ;
+                                                           owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-Communications/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                                                                       <http://www.cedri.com/OntologyToAPI-ExternalCode/1.0.0> ;
+                                                           <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+                                                           <http://purl.org/dc/terms/description> "This ontology represent the Consumption, Generation and Net-balance of community to the ASE Local Electricity Market" ;
+                                                           <http://purl.org/dc/terms/issued> "2025-04-07" ;
+                                                           <http://purl.org/dc/terms/modified> "2025-11-19" .
+
+#################################################################
+#    Classes
+#################################################################
+
+EC_Operations:CreateEnergyCommunityBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation create a Local Electricity Market." .
+
+EC_Operations:AddMemberBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to add members to a Local Electricity Market." .
+
+EC_Operations:AddAssetBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to add assets to a member of a Local Electricity Market." .
+
+EC_Operations:GetMemberBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to get members to a Local Electricity Market." .
+
+EC_Operations:GetEnergyCommunityBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to get all data from a Local Electricity Market." .
+
+EC_Operations:SimulateEnergyCommunityBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to simulate all assets from all members from a Local Electricity Market." .
+
+EC_Operations:GetLastEnergyCommunityConsProdBalanceBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to get the consumption, production and net balance from the last simulation at a Local Electricity Market." .
+
+EC_Operations:GetLastEnergyCommunityMarketBalanceBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to get the billing information such as revenue, payment information from the last simulation at a Local Electricity Market." .
+
+EC_Operations:GetMemberConsProdDeficitSurplusBalanceBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to get the deficit, surplus, power, consumption, production and net balance from the last simulation at a Local Electricity Market." .
+
+
+EC_Operations:GetMemberAssetOperationBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to get the asset operation of a given member asset from the last simulation at a Local Electricity Market." .
+
+EC_Operations:GetWeatherBM rdf:type owl:Class ;
+                           rdfs:subClassOf bm:BusinessModel ;
+                           rdfs:comment "A Energy Community operation to get weather info of a Local Electricity Community." .
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Endpoint Parameters
+
+EC_Operations:EC_Name rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "ECName" ;
+                            bm:hasParameterType "str" .
+
+EC_Operations:EC_Latitude rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "Latitude" ;
+                            bm:hasParameterType "float" .
+
+EC_Operations:EC_Longitude rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "Longitude" ;
+                            bm:hasParameterType "float" .
+
+EC_Operations:EC_TOU rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "TOU" ;
+                            bm:hasParameterType "float" .
+
+EC_Operations:EC_FIT rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "FIT" ;
+                            bm:hasParameterType "float" .
+
+EC_Operations:EC_ID rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "EnergyCommunityID" ;
+                            bm:hasParameterType "int" .
+
+EC_Operations:MemberData rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "MemberData" ;
+                            bm:hasParameterType "UploadFile" .
+
+EC_Operations:Member_ID rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "MemberID" ;
+                            bm:hasParameterType "int" .
+
+EC_Operations:AssetData rdf:type owl:NamedIndividual ,
+                                         bm:Parameter ;
+                            bm:hasParameterLabel "AssetData" ;
+                            bm:hasParameterType "UploadFile" .
+
+# Create EC Business Model
+
+EC_Operations:CreateEnergyCommunity rdf:type owl:NamedIndividual ,
+                                      EC_Operations:CreateEnergyCommunityBM ;
+                             bm:hasExternalCode EC_Operations:CreateEnergyCommunityFunction ;
+                             bm:hasParameter EC_Operations:EC_Name ,
+                                             EC_Operations:EC_Latitude ,
+                                             EC_Operations:EC_Longitude ,
+                                             EC_Operations:EC_TOU ,
+                                             EC_Operations:EC_FIT .
+
+EC_Operations:CreateEnergyCommunityFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "CreateEnergyCommunity" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "sqlite3" ,
+                                                  "pathlib" .
+
+# Add Member Business Model
+
+EC_Operations:AddMember rdf:type owl:NamedIndividual ,
+                                      EC_Operations:AddMemberBM ;
+                             bm:hasExternalCode EC_Operations:AddMemberFunction ;
+                             bm:hasParameter EC_Operations:EC_ID ,
+                                             EC_Operations:MemberData .
+
+EC_Operations:AddMemberFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "AddMemberToEnergyCommunity" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+# Add Asset to Member Business Model
+
+EC_Operations:AddAsset rdf:type owl:NamedIndividual ,
+                                      EC_Operations:AddAssetBM ;
+                             bm:hasExternalCode EC_Operations:AddAssetFunction ;
+                             bm:hasParameter EC_Operations:EC_ID ,
+                                             EC_Operations:Member_ID ,
+                                             EC_Operations:AssetData .
+
+EC_Operations:AddAssetFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "AddAssetToMember" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+# Get Members Business Model
+
+EC_Operations:GetMember rdf:type owl:NamedIndividual ,
+                                      EC_Operations:GetMemberBM ;
+                             bm:hasExternalCode EC_Operations:GetMemberFunction ;
+                             bm:hasParameter EC_Operations:EC_ID ,
+                                             EC_Operations:Member_ID .
+
+EC_Operations:GetMemberFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "GetMember" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+# Get EC Info and Members Business Model
+
+EC_Operations:GetEnergyCommunity rdf:type owl:NamedIndividual ,
+                                      EC_Operations:GetEnergyCommunityBM ;
+                             bm:hasExternalCode EC_Operations:GetEnergyCommunityFunction ;
+                             bm:hasParameter EC_Operations:EC_ID .
+
+EC_Operations:GetEnergyCommunityFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "GetEnergyCommunity" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+# Simulate Energy Community Business Model
+
+EC_Operations:SimulateEnergyCommunity rdf:type owl:NamedIndividual ,
+                                      EC_Operations:SimulateEnergyCommunityBM ;
+                             bm:hasExternalCode EC_Operations:SimulateEnergyCommunityFunction ;
+                             bm:hasParameter EC_Operations:EC_ID .
+
+EC_Operations:SimulateEnergyCommunityFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "SimulateEnergyCommunity" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+# Get Energy Community Cons Prod Balance Business Model
+
+EC_Operations:GetLastEnergyCommunityConsProdBalance rdf:type owl:NamedIndividual ,
+                                      EC_Operations:GetLastEnergyCommunityConsProdBalanceBM ;
+                             bm:hasExternalCode EC_Operations:GetLastEnergyCommunityConsProdBalanceFunction ;
+                             bm:hasParameter EC_Operations:EC_ID .
+
+EC_Operations:GetLastEnergyCommunityConsProdBalanceFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "GetLastEnergyCommunityConsProdBalance" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+# Get Energy Community Market Balance Business Model
+
+EC_Operations:GetLastEnergyCommunityMarketBalance rdf:type owl:NamedIndividual ,
+                                      EC_Operations:GetLastEnergyCommunityMarketBalanceBM ;
+                             bm:hasExternalCode EC_Operations:GetLastEnergyCommunityMarketBalanceFunction ;
+                             bm:hasParameter EC_Operations:EC_ID .
+
+EC_Operations:GetLastEnergyCommunityMarketBalanceFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "GetLastEnergyCommunityMarketBalance" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+# Get Member Cons Prod Balance Business Model
+
+EC_Operations:GetMemberConsProdDeficitSurplusBalance rdf:type owl:NamedIndividual ,
+                                      EC_Operations:GetMemberConsProdDeficitSurplusBalanceBM ;
+                                bm:hasExternalCode EC_Operations:GetMemberConsProdDeficitSurplusBalanceFunction ;
+                                bm:hasParameter EC_Operations:EC_ID ,
+                                                EC_Operations:Member_ID .
+
+EC_Operations:GetMemberConsProdDeficitSurplusBalanceFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "GetMemberConsProdBalance" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+# Get Asset Operation Business Model
+
+EC_Operations:GetMemberAssetOperation rdf:type owl:NamedIndividual ,
+                                      EC_Operations:GetMemberAssetOperationBM ;
+                                bm:hasExternalCode EC_Operations:GetMemberAssetOperationFunction ;
+                                bm:hasParameter EC_Operations:EC_ID ,
+                                                EC_Operations:Member_ID .
+
+EC_Operations:GetMemberAssetOperationFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "GetMemberAssetOperation" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+# Get Weather info Business Model
+
+EC_Operations:GetWeather rdf:type owl:NamedIndividual ,
+                                      EC_Operations:GetWeatherBM ;
+                             bm:hasExternalCode EC_Operations:WeatherFunction ;
+                             bm:hasParameter EC_Operations:EC_ID .
+
+EC_Operations:WeatherFunction rdf:type owl:NamedIndividual ,
+                                       excode:ExternalCode ;
+                               excode:hasFunction "GetWeatherInfo" ;
+                               excode:hasPythonFile "./BMs_Wrappers/EC_BMs.py" ;
+                               excode:requiresLib "unqlite" ,
+                                                  "sqlite3" ,
+                                                  "pathlib" .
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

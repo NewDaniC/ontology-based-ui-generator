@@ -1,0 +1,16 @@
+{
+  "views": [
+    {
+      "name": "EC View 1",
+      "filename": "SmartLEM-EC_View1.ttl"
+    },
+    {
+      "name": "EC View 2",
+      "filename": "SmartLEM-EC_View2.ttl"
+    },
+    {
+      "name": "View Teste",
+      "filename": "SmartLEM-View_Teste.ttl"
+    }
+  ]
+}

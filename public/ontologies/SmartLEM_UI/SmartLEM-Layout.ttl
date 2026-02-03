@@ -1,0 +1,111 @@
+@base <http://www.cedri.com/SmartLEM-Layout#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix ui: <http://www.cedri.com/OntologyToUI-UserInterface#> .
+@prefix layout: <http://www.cedri.com/SmartLEM-Layout#> .
+
+<http://www.cedri.com/SmartLEM-Layout> rdf:type owl:Ontology ;
+    owl:versionIRI <http://www.cedri.com/SmartLEM-Layout/1.0.0> ;
+    owl:imports <http://www.cedri.com/OntologyToUI-UserInterface/1.0.0> ;
+    <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+    <http://purl.org/dc/terms/description> "This ontology defines the base layout structure for SmartLEM UI." ;
+    <http://purl.org/dc/terms/issued> "2026-01-29" ;
+    <http://purl.org/dc/terms/modified> "2026-01-29" .
+
+#################################################################
+#    Classes
+#################################################################
+
+layout:Layout rdf:type owl:Class ;
+    rdfs:comment "The main layout structure that contains all layout components." .
+
+layout:Header rdf:type owl:Class ;
+    rdfs:comment "The header component displayed at the top of the page." .
+
+layout:Sidebar rdf:type owl:Class ;
+    rdfs:comment "The sidebar component displayed on the left side for navigation." .
+
+layout:Footer rdf:type owl:Class ;
+    rdfs:comment "The footer component displayed at the bottom of the page." .
+
+layout:ContentArea rdf:type owl:Class ;
+    rdfs:comment "The main content area where views are rendered." .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+layout:hasHeader rdf:type owl:ObjectProperty ;
+    rdfs:domain layout:Layout ;
+    rdfs:range layout:Header .
+
+layout:hasSidebar rdf:type owl:ObjectProperty ;
+    rdfs:domain layout:Layout ;
+    rdfs:range layout:Sidebar .
+
+layout:hasFooter rdf:type owl:ObjectProperty ;
+    rdfs:domain layout:Layout ;
+    rdfs:range layout:Footer .
+
+layout:hasContentArea rdf:type owl:ObjectProperty ;
+    rdfs:domain layout:Layout ;
+    rdfs:range layout:ContentArea .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+layout:hasTitle rdf:type owl:DatatypeProperty ;
+    rdfs:domain layout:Header ;
+    rdfs:range xsd:string .
+
+layout:hasText rdf:type owl:DatatypeProperty ;
+    rdfs:domain layout:Footer ;
+    rdfs:range xsd:string .
+
+layout:hasWidth rdf:type owl:DatatypeProperty ;
+    rdfs:domain layout:Sidebar ;
+    rdfs:range xsd:integer .
+
+layout:hasHeight rdf:type owl:DatatypeProperty ;
+    rdfs:domain layout:Header, layout:Footer ;
+    rdfs:range xsd:integer .
+
+layout:isFixed rdf:type owl:DatatypeProperty ;
+    rdfs:domain layout:Header, layout:Sidebar, layout:Footer ;
+    rdfs:range xsd:boolean .
+
+layout:hasPadding rdf:type owl:DatatypeProperty ;
+    rdfs:domain layout:ContentArea ;
+    rdfs:range xsd:integer .
+
+#################################################################
+#    Individuals
+#################################################################
+
+layout:SmartLEM_Layout rdf:type layout:Layout ;
+    layout:hasHeader layout:SmartLEM_Header ;
+    layout:hasSidebar layout:SmartLEM_Sidebar ;
+    layout:hasFooter layout:SmartLEM_Footer ;
+    layout:hasContentArea layout:SmartLEM_ContentArea .
+
+layout:SmartLEM_Header rdf:type layout:Header ;
+    layout:hasTitle "SmartLEM" ;
+    layout:hasHeight 64 ;
+    layout:isFixed false .
+
+layout:SmartLEM_Sidebar rdf:type layout:Sidebar ;
+    layout:hasWidth 200 .
+
+layout:SmartLEM_Footer rdf:type layout:Footer ;
+    layout:hasText "SmartLEM" ;
+    layout:hasHeight 50 ;
+    layout:isFixed true .
+
+layout:SmartLEM_ContentArea rdf:type layout:ContentArea ;
+    layout:hasPadding 24 . 
+    

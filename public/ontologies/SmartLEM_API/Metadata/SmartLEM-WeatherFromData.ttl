@@ -1,0 +1,513 @@
+@base <http://www.cedri.com/SmartLEM-Weather> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix md: <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm: <http://www.cedri.com/OntologyToAPI-Communications#> .
+
+@prefix ASE_Weather_Data: <http://www.cedri.com/SmartLEM-Weather#> .
+
+<http://www.cedri.com/SmartLEM-Weather> rdf:type owl:Ontology ;
+                                        owl:versionIRI <http://www.cedri.com/SmartLEM-Weather/1.0.0> ;
+                                        owl:imports <http://www.cedri.com/OntologyToAPI-Metadata/1.0.0> ,
+                                                    <http://www.cedri.com/OntologyToAPI-Communications/1.0.0>;
+                                        <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+                                        <http://purl.org/dc/terms/description> "This ontology represent the weather data from the open-meteo API to be used in the context of Local Electricity Markets." ;
+                                        <http://purl.org/dc/terms/issued> "2025-04-07" ;
+                                        <http://purl.org/dc/terms/modified> "2025-11-19" .
+
+#################################################################
+#    Classes
+#################################################################
+
+ASE_Weather_Data:Aggregated rdf:type owl:Class ;
+    rdfs:subClassOf md:Metadata ;
+    rdfs:comment "The aggregated source of data"@en .
+
+ASE_Weather_Data:Timestamp rdf:type owl:Class ;
+    rdfs:subClassOf md:Metadata ;
+    rdfs:comment "The timestamp of the data collection"@en .
+
+ASE_Weather_Data:Temperature2m rdf:type owl:Class ;
+  rdfs:subClassOf md:Metadata ;
+    rdfs:comment "The temperature of the data collection"@en .
+
+ASE_Weather_Data:Relativehumidity2m rdf:type owl:Class ;
+  rdfs:subClassOf md:Metadata ;
+    rdfs:comment "The relative humidity of the data collection"@en .
+
+ASE_Weather_Data:Dewpoint2m rdf:type owl:Class ;
+  rdfs:subClassOf md:Metadata ;
+    rdfs:comment "The dewpoint of the data collection"@en .
+
+ASE_Weather_Data:Temperature rdf:type owl:Class ;
+  rdfs:comment "Air temperature measured, likely in degrees Celsius."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:PrecipitationProbability rdf:type owl:Class ;
+  rdfs:comment "Probability of precipitation expressed as a percentage."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Precipitation rdf:type owl:Class ;
+  rdfs:comment "Amount of precipitation (rainfall or snow) accumulated, likely in millimeters."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Weathercode rdf:type owl:Class ;
+  rdfs:comment "Weather condition code representing the observed weather state."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:SurfacePressure rdf:type owl:Class ;
+  rdfs:comment "Atmospheric surface pressure, measured in hPa."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Cloudcover rdf:type owl:Class ;
+  rdfs:comment "Total percentage of sky covered by clouds."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:CloudcoverLow rdf:type owl:Class ;
+  rdfs:comment "Total percentage of sky covered by clouds."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:CloudcoverMid rdf:type owl:Class ;
+  rdfs:comment "Total percentage of sky covered by clouds."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:CloudcoverHigh rdf:type owl:Class ;
+  rdfs:comment "Total percentage of sky covered by clouds."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Visibility rdf:type owl:Class ;
+  rdfs:comment "Horizontal visibility distance, likely in meters."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Evapotranspiration rdf:type owl:Class ;
+  rdfs:comment "Evapotranspiration rate indicating water loss via evaporation and plant transpiration."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Windspeed rdf:type owl:Class ;
+  rdfs:comment "Average wind speed, likely in km/h or m/s."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Winddirection10m rdf:type owl:Class ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Windgusts10m rdf:type owl:Class ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:UvIndex rdf:type owl:Class ;
+  rdfs:comment "Ultraviolet radiation index, indicating sunburn risk."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:UvIndexClearSky rdf:type owl:Class ;
+  rdfs:comment "Ultraviolet index under clear-sky conditions."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Cape rdf:type owl:Class ;
+  rdfs:comment "Convective Available Potential Energy, a measure of atmospheric instability."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:ShortwaveRadiation rdf:type owl:Class ;
+  rdfs:comment "Shortwave solar radiation reaching the surface, likely in W/m²."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:DirectRadiation rdf:type owl:Class ;
+  rdfs:comment "Numeric measurement field ('direct_radiation')."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:DiffuseRadiation rdf:type owl:Class ;
+  rdfs:comment "Numeric measurement field ('diffuse_radiation')."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:DirectNormalIrradiance rdf:type owl:Class ;
+  rdfs:comment "Numeric measurement field ('direct_normal_irradiance')."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:TerrestrialRadiation rdf:type owl:Class ;
+  rdfs:comment "Numeric measurement field ('terrestrial_radiation')."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:ShortwaveRadiationInstant rdf:type owl:Class ;
+  rdfs:comment "Shortwave solar radiation reaching the surface, likely in W/m²."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:DirectRadiationInstant rdf:type owl:Class ;
+  rdfs:comment "Numeric measurement field ('direct_radiation_instant')."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:DiffuseRadiationInstant rdf:type owl:Class ;
+  rdfs:comment "Numeric measurement field ('diffuse_radiation_instant')."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:DirectNormalIrradianceInstant rdf:type owl:Class ;
+  rdfs:comment "Numeric measurement field ('direct_normal_irradiance_instant')."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:TerrestrialRadiationInstant rdf:type owl:Class ;
+  rdfs:comment "Numeric measurement field ('terrestrial_radiation_instant')."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:IdLocation rdf:type owl:Class ;
+  rdfs:comment "Unique identifier of the location or station."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Latidue rdf:type owl:Class ;
+  rdfs:comment "Latitude coordinate of the observation point in decimal degrees."@en ;
+  rdfs:subClassOf md:Metadata .
+
+ASE_Weather_Data:Longitude rdf:type owl:Class ;
+  rdfs:comment "Longitude coordinate of the observation point in decimal degrees."@en ;
+  rdfs:subClassOf md:Metadata .
+
+#################################################################
+#    Individuals
+#################################################################
+
+ASE_Weather_Data:Aggregated_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Aggregated ;
+                  md:hasSource ASE_Weather_Data:Aggregated_S ;
+                  md:hasType "dict" .
+
+ASE_Weather_Data:Aggregated_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+                  md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+                  md:hasDescription "Retrieves the aggregated data." ;
+                  md:hasQuery "SELECT * FROM weather;" .
+
+ASE_Weather_Data:DatabaseCommunication_R rdf:type owl:NamedIndividual ,
+                                      comm:DatabaseCommunication ;
+                             comm:hasConnectionString "sqlite+aiosqlite:///Databases/ec_data.db" ;
+                             comm:usesTechnology "MYSQL" .
+
+ASE_Weather_Data:Timestamp_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Timestamp ;
+                  md:hasSource ASE_Weather_Data:Timestamp_S ;
+                  md:hasType "dict" .
+
+ASE_Weather_Data:Timestamp_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+                  md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+                  md:hasDescription "Retrieves the Timestamp data." ;
+                  md:hasQuery "SELECT Timestamp FROM weather;" .
+
+ASE_Weather_Data:PrecipitationProbability_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:PrecipitationProbability ;
+               md:hasSource ASE_Weather_Data:PrecipitationProbability_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:PrecipitationProbability_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the PrecipitationProbability data." ;
+               md:hasQuery "SELECT precipitation_probability FROM weather;" .
+
+ASE_Weather_Data:Precipitation_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Precipitation ;
+               md:hasSource ASE_Weather_Data:Precipitation_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Precipitation_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Precipitation data." ;
+               md:hasQuery "SELECT precipitation FROM weather;" .
+
+ASE_Weather_Data:Weathercode_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Weathercode ;
+               md:hasSource ASE_Weather_Data:Weathercode_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Weathercode_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Weathercode data." ;
+               md:hasQuery "SELECT weathercode FROM weather;" .
+
+ASE_Weather_Data:SurfacePressure_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:SurfacePressure ;
+               md:hasSource ASE_Weather_Data:SurfacePressure_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:SurfacePressure_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the SurfacePressure data." ;
+               md:hasQuery "SELECT surface_pressure FROM weather;" .
+
+ASE_Weather_Data:Cloudcover_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Cloudcover ;
+               md:hasSource ASE_Weather_Data:Cloudcover_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Cloudcover_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Cloudcover data." ;
+               md:hasQuery "SELECT cloudcover FROM weather;" .
+
+ASE_Weather_Data:CloudcoverLow_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:CloudcoverLow ;
+               md:hasSource ASE_Weather_Data:CloudcoverLow_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:CloudcoverLow_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the CloudcoverLow data." ;
+               md:hasQuery "SELECT cloudcover_low FROM weather;" .
+
+ASE_Weather_Data:CloudcoverMid_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:CloudcoverMid ;
+               md:hasSource ASE_Weather_Data:CloudcoverMid_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:CloudcoverMid_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the CloudcoverMid data." ;
+               md:hasQuery "SELECT cloudcover_mid FROM weather;" .
+
+ASE_Weather_Data:CloudcoverHigh_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:CloudcoverHigh ;
+               md:hasSource ASE_Weather_Data:CloudcoverHigh_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:CloudcoverHigh_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the CloudcoverHigh data." ;
+               md:hasQuery "SELECT cloudcover_high FROM weather;" .
+
+ASE_Weather_Data:Visibility_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Visibility ;
+               md:hasSource ASE_Weather_Data:Visibility_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Visibility_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Visibility data." ;
+               md:hasQuery "SELECT visibility FROM weather;" .
+
+ASE_Weather_Data:Evapotranspiration_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Evapotranspiration ;
+               md:hasSource ASE_Weather_Data:Evapotranspiration_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Evapotranspiration_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Evapotranspiration data." ;
+               md:hasQuery "SELECT evapotranspiration FROM weather;" .
+
+ASE_Weather_Data:Windspeed_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Windspeed ;
+               md:hasSource ASE_Weather_Data:Windspeed_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Windspeed_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Windspeed data." ;
+               md:hasQuery "SELECT windspeed FROM weather;" .
+
+ASE_Weather_Data:Winddirection10m_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Winddirection10m ;
+               md:hasSource ASE_Weather_Data:Winddirection10m_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Winddirection10m_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Winddirection10m data." ;
+               md:hasQuery "SELECT winddirection_10m FROM weather;" .
+
+ASE_Weather_Data:Windgusts10m_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Windgusts10m ;
+               md:hasSource ASE_Weather_Data:Windgusts10m_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Windgusts10m_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Windgusts10m data." ;
+               md:hasQuery "SELECT windgusts_10m FROM weather;" .
+
+ASE_Weather_Data:UvIndex_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:UvIndex ;
+               md:hasSource ASE_Weather_Data:UvIndex_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:UvIndex_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the UvIndex data." ;
+               md:hasQuery "SELECT uv_index FROM weather;" .
+
+ASE_Weather_Data:UvIndexClearSky_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:UvIndexClearSky ;
+               md:hasSource ASE_Weather_Data:UvIndexClearSky_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:UvIndexClearSky_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the UvIndexClearSky data." ;
+               md:hasQuery "SELECT uv_index_clear_sky FROM weather;" .
+
+ASE_Weather_Data:Cape_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Cape ;
+               md:hasSource ASE_Weather_Data:Cape_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Cape_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Cape data." ;
+               md:hasQuery "SELECT cape FROM weather;" .
+
+ASE_Weather_Data:ShortwaveRadiation_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:ShortwaveRadiation ;
+               md:hasSource ASE_Weather_Data:ShortwaveRadiation_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:ShortwaveRadiation_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the ShortwaveRadiation data." ;
+               md:hasQuery "SELECT shortwave_radiation FROM weather;" .
+
+ASE_Weather_Data:DirectRadiation_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:DirectRadiation ;
+               md:hasSource ASE_Weather_Data:DirectRadiation_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:DirectRadiation_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the DirectRadiation data." ;
+               md:hasQuery "SELECT direct_radiation FROM weather;" .
+
+ASE_Weather_Data:DiffuseRadiation_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:DiffuseRadiation ;
+               md:hasSource ASE_Weather_Data:DiffuseRadiation_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:DiffuseRadiation_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the DiffuseRadiation data." ;
+               md:hasQuery "SELECT diffuse_radiation FROM weather;" .
+
+ASE_Weather_Data:DirectNormalIrradiance_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:DirectNormalIrradiance ;
+               md:hasSource ASE_Weather_Data:DirectNormalIrradiance_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:DirectNormalIrradiance_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the DirectNormalIrradiance data." ;
+               md:hasQuery "SELECT direct_normal_irradiance FROM weather;" .
+
+ASE_Weather_Data:TerrestrialRadiation_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:TerrestrialRadiation ;
+               md:hasSource ASE_Weather_Data:TerrestrialRadiation_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:TerrestrialRadiation_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the TerrestrialRadiation data." ;
+               md:hasQuery "SELECT terrestrial_radiation FROM weather;" .
+
+ASE_Weather_Data:ShortwaveRadiationInstant_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:ShortwaveRadiationInstant ;
+               md:hasSource ASE_Weather_Data:ShortwaveRadiationInstant_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:ShortwaveRadiationInstant_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the ShortwaveRadiationInstant data." ;
+               md:hasQuery "SELECT shortwave_radiation_instant FROM weather;" .
+
+ASE_Weather_Data:DirectRadiationInstant_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:DirectRadiationInstant ;
+               md:hasSource ASE_Weather_Data:DirectRadiationInstant_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:DirectRadiationInstant_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the DirectRadiationInstant data." ;
+               md:hasQuery "SELECT direct_radiation_instant FROM weather;" .
+
+ASE_Weather_Data:DiffuseRadiationInstant_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:DiffuseRadiationInstant ;
+               md:hasSource ASE_Weather_Data:DiffuseRadiationInstant_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:DiffuseRadiationInstant_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the DiffuseRadiationInstant data." ;
+               md:hasQuery "SELECT diffuse_radiation_instant FROM weather;" .
+
+ASE_Weather_Data:DirectNormalIrradianceInstant_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:DirectNormalIrradianceInstant ;
+               md:hasSource ASE_Weather_Data:DirectNormalIrradianceInstant_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:DirectNormalIrradianceInstant_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the DirectNormalIrradianceInstant data." ;
+               md:hasQuery "SELECT direct_normal_irradiance_instant FROM weather;" .
+
+ASE_Weather_Data:TerrestrialRadiationInstant_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:TerrestrialRadiationInstant ;
+               md:hasSource ASE_Weather_Data:TerrestrialRadiationInstant_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:TerrestrialRadiationInstant_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the TerrestrialRadiationInstant data." ;
+               md:hasQuery "SELECT terrestrial_radiation_instant FROM weather;" .
+
+ASE_Weather_Data:IdLocation_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:IdLocation ;
+               md:hasSource ASE_Weather_Data:IdLocation_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:IdLocation_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the IdLocation data." ;
+               md:hasQuery "SELECT id_location FROM weather;" .
+
+ASE_Weather_Data:Latidue_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Latidue ;
+               md:hasSource ASE_Weather_Data:Latidue_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Latidue_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Latidue data." ;
+               md:hasQuery "SELECT latidue FROM weather;" .
+
+ASE_Weather_Data:Longitude_R rdf:type owl:NamedIndividual ,
+                           ASE_Weather_Data:Longitude ;
+               md:hasSource ASE_Weather_Data:Longitude_S ;
+               md:hasType "dict" .
+
+ASE_Weather_Data:Longitude_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+               md:hasCommunicationTechnology ASE_Weather_Data:DatabaseCommunication_R ;
+               md:hasDescription "Retrieves the Longitude data." ;
+               md:hasQuery "SELECT longitude FROM weather;" .
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
