@@ -96,7 +96,7 @@ layout:SmartLEM_Layout rdf:type layout:Layout ;
 layout:SmartLEM_Header rdf:type layout:Header ;
     layout:hasTitle "SmartLEM" ;
     layout:hasHeight 64 ;
-    layout:isFixed false .
+    layout:isFixed true .
 
 layout:SmartLEM_Sidebar rdf:type layout:Sidebar ;
     layout:hasWidth 200 .

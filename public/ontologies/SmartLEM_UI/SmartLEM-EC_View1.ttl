@@ -39,19 +39,25 @@ EC_View:RunSimulation_Page rdf:type EC_View:RunSimulation ;
                                                         EC_View:Table1 .
 
 EC_View:Label1 rdf:type ui:Label ;
-                  ui:hasText "Get Energy Community Information" .
+                  ui:hasText "Get Energy Community Information" ;
+                  ui:order 1 .
 
 EC_View:Label2 rdf:type ui:Label ;
-                  ui:hasText "Get Energy Community Information" .
+                  ui:hasText "Get Energy Community Information" ;
+                  ui:order 2 .
 
 EC_View:Label3 rdf:type ui:Label ;
-                  ui:hasText "Get Energy Community Information" .
+                  ui:hasText "Get Energy Community Information" ;
+                  ui:order 3 .
 
 EC_View:Label4 rdf:type ui:Label ;
-                  ui:hasText "111111111" .
+                  ui:hasText "111111111" ;
+                  ui:order 4 .
 
 EC_View:Table1 rdf:type ui:Table ;
-                  ui:hasBusinessModel ASE_BM:SimulationBM .
+                  ui:hasBusinessModel ASE_BM:SimulationBM ;
+                  ui:order 5 .
 
 EC_View:Label5 rdf:type ui:Label ;
-                  ui:hasText "111111111" .
+                  ui:hasText "111111111" ;
+                  ui:order 6 .

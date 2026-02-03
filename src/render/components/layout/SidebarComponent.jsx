@@ -58,6 +58,7 @@ export default function SidebarComponent({
       width={width}
       style={{
         background: '#001529',
+        //background: '#ffffffff',
         ...sidebarStyle,
       }}
     >
@@ -69,6 +70,7 @@ export default function SidebarComponent({
         items={menuItems}
         style={{
           background: '#001529',
+          //background: '#ffffffff',
           borderRight: 'none',
         }}
       />
