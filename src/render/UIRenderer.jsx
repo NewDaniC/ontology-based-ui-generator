@@ -32,7 +32,8 @@ export default function UIRenderer({ uiElements, apiEndpoints, loading, error })
     return null;
   }
 
-  const { pages = [], labels = [], tables = [] } = uiElements;
+  const { pages = [], labels = [], tables = [], endpoints = [] } = uiElements;
+  const shouldRenderEndpoints = Array.isArray(endpoints) ? endpoints.length > 0 : Boolean(endpoints);
 
   return (
     <div style={{ 
@@ -88,8 +89,12 @@ export default function UIRenderer({ uiElements, apiEndpoints, loading, error })
       )}
 
       {/* Endpoints */}
-      <Title level={3}>API Endpoints</Title>
-      <EndpointsComponent apiEndpoints={apiEndpoints} />
+      {shouldRenderEndpoints && (
+        <>
+          <Title level={3}>API Endpoints</Title>
+          <EndpointsComponent apiEndpoints={apiEndpoints} />
+        </>
+      )}
     </div>
   );
 }

@@ -1,0 +1,437 @@
+@base <http://www.cedri.com/SmartLEM-LEMMembers> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix md: <http://www.cedri.com/OntologyToAPI-Metadata#> .
+@prefix comm: <http://www.cedri.com/OntologyToAPI-Communications#> .
+
+@prefix LEMMembers: <http://www.cedri.com/SmartLEM-LEMMembers#> .
+
+<http://www.cedri.com/SmartLEM-LEMMembers> rdf:type owl:Ontology ;
+                                            owl:versionIRI <http://www.cedri.com/SmartLEM-LEMMembers/1.0.0> ;
+                                            owl:imports <http://www.cedri.com/SmartLEM-Metadata/1.0.0> ,
+                                                        <http://www.cedri.com/SmartLEM-Communications/1.0.0> ;
+                                            <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+                                            <http://purl.org/dc/terms/description> "This ontology represent the concepts from the LEM Members devised by the smartLEM Framework metadata for a Local Electricity Market Community." ;
+                                            <http://purl.org/dc/terms/issued> "2025-04-07" ;
+                                            <http://purl.org/dc/terms/modified> "2025-11-19" .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.cedri.com/SmartLEM-WeatherMonitoring-UseCase#Aggregated
+LEMMembers:Aggregated rdf:type owl:Class ;
+                rdfs:subClassOf md:Metadata ;
+                rdfs:comment "The aggregated source of data" .
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#appliances
+LEMMembers:appliances rdf:type owl:Class ;
+                rdfs:subClassOf md:Metadata ;
+                rdfs:comment "The amount of appliances a building has." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#battery_storage
+LEMMembers:battery_storage rdf:type owl:Class ;
+                     rdfs:subClassOf md:Metadata ;
+                     rdfs:comment "The presence of batteries to store electricity." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#building_insulation
+LEMMembers:building_insulation rdf:type owl:Class ;
+                         rdfs:subClassOf md:Metadata ;
+                         rdfs:comment "The amount of heat insulation of a building." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#building_size
+LEMMembers:building_size rdf:type owl:Class ;
+                   rdfs:subClassOf md:Metadata ;
+                   rdfs:comment "The size a building has." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#building_surface_area
+LEMMembers:building_surface_area rdf:type owl:Class ;
+                           rdfs:subClassOf md:Metadata ;
+                           rdfs:comment "The surface of a building has." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#cooling_system
+LEMMembers:cooling_system rdf:type owl:Class ;
+                    rdfs:subClassOf md:Metadata ;
+                    rdfs:comment "The type of the cooling system." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_charging
+LEMMembers:ev_charging rdf:type owl:Class ;
+                 rdfs:subClassOf md:Metadata ;
+                 rdfs:comment "The charging status of electric vehicle." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_charging_level
+LEMMembers:ev_charging_level rdf:type owl:Class ;
+                       rdfs:subClassOf md:Metadata ;
+                       rdfs:comment "The charging level of an electric vehicle battery." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_ownership
+LEMMembers:ev_ownership rdf:type owl:Class ;
+                  rdfs:subClassOf md:Metadata ;
+                  rdfs:comment "The electric vehicle owner." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_type
+LEMMembers:ev_type rdf:type owl:Class ;
+             rdfs:subClassOf md:Metadata ;
+             rdfs:comment "The electric vehicle type." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#heating_system
+LEMMembers:heating_system rdf:type owl:Class ;
+                    rdfs:subClassOf md:Metadata ;
+                    rdfs:comment "The fuel used for the heating system." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#heating_type
+LEMMembers:heating_type rdf:type owl:Class ;
+                  rdfs:subClassOf md:Metadata ;
+                  rdfs:comment "The heat is distributed by the occupants." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#load_capacity
+LEMMembers:load_capacity rdf:type owl:Class ;
+                   rdfs:subClassOf md:Metadata ;
+                   rdfs:comment "The load capacity from the electric system." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#occupancy_schedule
+LEMMembers:occupancy_schedule rdf:type owl:Class ;
+                        rdfs:subClassOf md:Metadata ;
+                        rdfs:comment "The time in the day the occupants of a building use more appliances." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#occupants
+LEMMembers:occupants rdf:type owl:Class ;
+               rdfs:subClassOf md:Metadata ;
+               rdfs:comment "The amount of occupants a build has." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#solar_panels
+LEMMembers:solar_panels rdf:type owl:Class ;
+                  rdfs:subClassOf md:Metadata ;
+                  rdfs:comment "The presence of solar panels." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#water_heating_system
+LEMMembers:water_heating_system rdf:type owl:Class ;
+                          rdfs:subClassOf md:Metadata ;
+                          rdfs:comment "The type of the heating system, if it uses water." .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#wind_turbines
+LEMMembers:wind_turbines rdf:type owl:Class ;
+                   rdfs:subClassOf md:Metadata ;
+                   rdfs:comment "The presence of wind turbines." .
+
+
+###  http://www.cedri.com/SmartLEM-Metadata#Metadata
+md:Metadata rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#Aggregated_R
+LEMMembers:Aggregated_R rdf:type owl:NamedIndividual ,
+                           LEMMembers:Aggregated ;
+                  md:hasSource LEMMembers:Aggregated_S ;
+                  md:hasType "dict" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#Aggregated_S
+LEMMembers:Aggregated_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+                  md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                  md:hasDescription "Retrieves the aggregated data." ;
+                  md:hasQuery "members.{}" .
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#DatabaseCommunication_R
+LEMMembers:DatabaseCommunication_R rdf:type owl:NamedIndividual ,
+                                      comm:DatabaseCommunication ;
+                             comm:hasConnectionString "unqlite+asyncio://Databases/ase_members_data.unqlite" ;
+                             comm:usesTechnology "UNQLITE" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#appliances_R
+LEMMembers:appliances_R rdf:type owl:NamedIndividual ,
+                           LEMMembers:appliances ;
+                  md:hasSource LEMMembers:appliances_S ;
+                  md:hasType "integer" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#appliances_S
+LEMMembers:appliances_S rdf:type owl:NamedIndividual ,
+                           md:Source ;
+                  md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                  md:hasDescription"Retrieves the appliances." ;
+                  md:hasQuery "members.{ \"appliances\": 1}" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#battery_storage_R
+LEMMembers:battery_storage_R rdf:type owl:NamedIndividual ,
+                                LEMMembers:battery_storage ;
+                       md:hasSource LEMMembers:battery_storage_S ;
+                       md:hasType "bool" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#battery_storage_S
+LEMMembers:battery_storage_S rdf:type owl:NamedIndividual ,
+                                md:Source ;
+                       md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                       md:hasDescription"Retrieves the battery_storage." ;
+                       md:hasQuery "members.{ \"battery_storage\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#building_insulation_R
+LEMMembers:building_insulation_R rdf:type owl:NamedIndividual ,
+                                    LEMMembers:building_insulation ;
+                           md:hasSource LEMMembers:building_insulation_S ;
+                           md:hasType "string" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#building_insulation_S
+LEMMembers:building_insulation_S rdf:type owl:NamedIndividual ,
+                                    md:Source ;
+                           md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                           md:hasDescription"Retrieves the building_insulation." ;
+                           md:hasQuery "members.{ \"building_insulation\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#building_size_R
+LEMMembers:building_size_R rdf:type owl:NamedIndividual ,
+                              LEMMembers:building_size ;
+                     md:hasSource LEMMembers:building_size_S ;
+                     md:hasType "integer" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#building_size_S
+LEMMembers:building_size_S rdf:type owl:NamedIndividual ,
+                              md:Source ;
+                     md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                     md:hasDescription"Retrieves the building_size." ;
+                     md:hasQuery "members.{ \"building_size\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#building_surface_area_R
+LEMMembers:building_surface_area_R rdf:type owl:NamedIndividual ,
+                                      LEMMembers:building_surface_area ;
+                             md:hasSource LEMMembers:building_surface_area_S ;
+                             md:hasType "integer" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#building_surface_area_S
+LEMMembers:building_surface_area_S rdf:type owl:NamedIndividual ,
+                                      md:Source ;
+                             md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                             md:hasDescription"Retrieves the building_surface_area." ;
+                             md:hasQuery "members.{ \"building_surface_area\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#cooling_system_R
+LEMMembers:cooling_system_R rdf:type owl:NamedIndividual ,
+                               LEMMembers:cooling_system ;
+                      md:hasSource LEMMembers:cooling_system_S ;
+                      md:hasType "string" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#cooling_system_S
+LEMMembers:cooling_system_S rdf:type owl:NamedIndividual ,
+                               md:Source ;
+                      md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                      md:hasDescription"Retrieves the cooling_system." ;
+                      md:hasQuery "members.{ \"cooling_system\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_charging_R
+LEMMembers:ev_charging_R rdf:type owl:NamedIndividual ,
+                            LEMMembers:ev_charging ;
+                   md:hasSource LEMMembers:ev_charging_S ;
+                   md:hasType "bool" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_charging_S
+LEMMembers:ev_charging_S rdf:type owl:NamedIndividual ,
+                            md:Source ;
+                   md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                   md:hasDescription"Retrieves the ev_charging." ;
+                   md:hasQuery "members.{ \"ev_charging\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_charging_level_R
+LEMMembers:ev_charging_level_R rdf:type owl:NamedIndividual ,
+                                  LEMMembers:ev_charging_level ;
+                         md:hasSource LEMMembers:ev_charging_level_S ;
+                         md:hasType "string" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_charging_level_S
+LEMMembers:ev_charging_level_S rdf:type owl:NamedIndividual ,
+                                  md:Source ;
+                         md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                         md:hasDescription"Retrieves the ev_charging_level." ;
+                         md:hasQuery "members.{ \"ev_charging_level\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_ownership_R
+LEMMembers:ev_ownership_R rdf:type owl:NamedIndividual ,
+                             LEMMembers:ev_ownership ;
+                    md:hasSource LEMMembers:ev_ownership_S ;
+                    md:hasType "bool" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_ownership_S
+LEMMembers:ev_ownership_S rdf:type owl:NamedIndividual ,
+                             md:Source ;
+                    md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                    md:hasDescription"Retrieves the ev_ownership." ;
+                    md:hasQuery "members.{ \"ev_ownership\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_type_R
+LEMMembers:ev_type_R rdf:type owl:NamedIndividual ,
+                        LEMMembers:ev_type ;
+               md:hasSource LEMMembers:ev_type_S ;
+               md:hasType "string" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#ev_type_S
+LEMMembers:ev_type_S rdf:type owl:NamedIndividual ,
+                        md:Source ;
+               md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+               md:hasDescription"Retrieves the ev_type." ;
+               md:hasQuery "members.{ \"ev_type\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#heating_system_R
+LEMMembers:heating_system_R rdf:type owl:NamedIndividual ,
+                               LEMMembers:heating_system ;
+                      md:hasSource LEMMembers:heating_system_S ;
+                      md:hasType "string" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#heating_system_S
+LEMMembers:heating_system_S rdf:type owl:NamedIndividual ,
+                               md:Source ;
+                      md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                      md:hasDescription"Retrieves the heating_system." ;
+                      md:hasQuery "members.{ \"heating_system\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#heating_type_R
+LEMMembers:heating_type_R rdf:type owl:NamedIndividual ,
+                             LEMMembers:heating_type ;
+                    md:hasSource LEMMembers:heating_type_S ;
+                    md:hasType "string" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#heating_type_S
+LEMMembers:heating_type_S rdf:type owl:NamedIndividual ,
+                             md:Source ;
+                    md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                    md:hasDescription"Retrieves the heating_type." ;
+                    md:hasQuery "members.{ \"heating_type\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#load_capacity_R
+LEMMembers:load_capacity_R rdf:type owl:NamedIndividual ,
+                              LEMMembers:load_capacity ;
+                     md:hasSource LEMMembers:load_capacity_S ;
+                     md:hasType "float" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#load_capacity_S
+LEMMembers:load_capacity_S rdf:type owl:NamedIndividual ,
+                              md:Source ;
+                     md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                     md:hasDescription"Retrieves the load_capacity." ;
+                     md:hasQuery "members.{ \"load_capacity\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#occupancy_schedule_R
+LEMMembers:occupancy_schedule_R rdf:type owl:NamedIndividual ,
+                                   LEMMembers:occupancy_schedule ;
+                          md:hasSource LEMMembers:occupancy_schedule_S ;
+                          md:hasType "string" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#occupancy_schedule_S
+LEMMembers:occupancy_schedule_S rdf:type owl:NamedIndividual ,
+                                   md:Source ;
+                          md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                          md:hasDescription"Retrieves the occupancy_schedule." ;
+                          md:hasQuery "members.{ \"occupancy_schedule\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#occupants_R
+LEMMembers:occupants_R rdf:type owl:NamedIndividual ,
+                          LEMMembers:occupants ;
+                 md:hasSource LEMMembers:occupants_S ;
+                 md:hasType "integer" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#occupants_S
+LEMMembers:occupants_S rdf:type owl:NamedIndividual ,
+                          md:Source ;
+                 md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                 md:hasDescription"Retrieves the occupants." ;
+                 md:hasQuery "members.{ \"occupants\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#solar_panels_R
+LEMMembers:solar_panels_R rdf:type owl:NamedIndividual ,
+                             LEMMembers:solar_panels ;
+                    md:hasSource LEMMembers:solar_panels_S ;
+                    md:hasType "bool" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#solar_panels_S
+LEMMembers:solar_panels_S rdf:type owl:NamedIndividual ,
+                             md:Source ;
+                    md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                    md:hasDescription"Retrieves the solar_panels." ;
+                    md:hasQuery "members.{ \"solar_panels\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#water_heating_system_R
+LEMMembers:water_heating_system_R rdf:type owl:NamedIndividual ,
+                                     LEMMembers:water_heating_system ;
+                            md:hasSource LEMMembers:water_heating_system_S ;
+                            md:hasType "string" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#water_heating_system_S
+LEMMembers:water_heating_system_S rdf:type owl:NamedIndividual ,
+                                     md:Source ;
+                            md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                            md:hasDescription"Retrieves the water_heating_system." ;
+                            md:hasQuery "members.{ \"water_heating_system\": 1 }" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#wind_turbines_R
+LEMMembers:wind_turbines_R rdf:type owl:NamedIndividual ,
+                              LEMMembers:wind_turbines ;
+                     md:hasSource LEMMembers:wind_turbines_S ;
+                     md:hasType "bool" .
+
+
+###  http://www.cedri.com/SmartLEM-LEMMembers#wind_turbines_S
+LEMMembers:wind_turbines_S rdf:type owl:NamedIndividual ,
+                              md:Source ;
+                     md:hasCommunicationTechnology LEMMembers:DatabaseCommunication_R ;
+                     md:hasDescription"Retrieves the wind_turbines." ;
+                     md:hasQuery "members.{ \"wind_turbines\": 1 }" .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
