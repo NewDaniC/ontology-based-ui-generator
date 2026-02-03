@@ -4,9 +4,9 @@ import { ConfigProvider, Spin, Alert, Typography } from 'antd';
 import enUS from 'antd/locale/en_US';
 
 import { serializeOntologies, findEndpoints } from './lib/index.js';
-import { renderUI } from './render/ui_renderer.js';
-import { loadLayoutOntology, discoverViews } from './render/layout_renderer.js';
-import UIRenderer from './render/UIRenderer.jsx';
+import { renderUI } from './render/ViewOntologyRenderer.js';
+import { loadLayoutOntology, discoverViews } from './render/components/layout/LayoutOntologyRenderer.js';
+import UIRenderer from './render/components/ui/UIRenderer.jsx';
 import MainLayout from './render/components/layout/MainLayout.jsx';
 
 const { Paragraph } = Typography;
