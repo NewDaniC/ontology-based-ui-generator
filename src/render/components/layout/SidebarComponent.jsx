@@ -1,57 +1,40 @@
-import { useEffect, useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { FileOutlined } from '@ant-design/icons';
 
-export default function SidebarComponent({ 
-  views, 
-  selectedView, 
-  onViewSelect, 
-  width, 
-  headerHeight, 
+export default function SidebarComponent({
+  views,
+  selectedView,
+  onViewSelect,
+  width,
+  headerHeight,
   footerHeight,
   headerIsFixed,
   footerIsFixed
 }) {
-  const [dynamicTop, setDynamicTop] = useState(headerHeight);
-
-  useEffect(() => {
-    if (headerIsFixed) {
-      setDynamicTop(headerHeight);
-      return undefined;
-    }
-
-    const handleScroll = () => {
-      const nextTop = Math.max(0, headerHeight - window.scrollY);
-      setDynamicTop(nextTop);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [headerIsFixed, headerHeight]);
-
-  // Sidebar always stays below header and above footer
-  // top: follows header while scrolling when header is not fixed
-  // bottom: footerHeight if footer is fixed, otherwise 0 (goes to bottom of page)
-  const topOffset = headerIsFixed ? headerHeight : dynamicTop;
-  const bottomOffset = footerIsFixed ? footerHeight : 0;
-
   // Generate menu items from views
-  const menuItems = views.map((view, index) => ({
+  const menuItems = views.map((view) => ({
     key: view.path,
     icon: <FileOutlined />,
     label: view.name,
   }));
 
-  // Sidebar is always fixed
-  const sidebarStyle = {
-    position: 'fixed',
-    top: topOffset,
-    bottom: bottomOffset,
-    left: 0,
-    overflowY: 'auto',
-  };
+  // When header is fixed: use position fixed with top offset
+  // When header is not fixed: use position sticky to "stick" below the header instantly
+  const sidebarStyle = headerIsFixed
+    ? {
+        position: 'fixed',
+        top: headerHeight,
+        bottom: footerIsFixed ? footerHeight : 0,
+        left: 0,
+        overflowY: 'auto',
+      }
+    : {
+        position: 'sticky',
+        top: 0,
+        height: `calc(100vh - ${footerIsFixed ? footerHeight : 0}px)`,
+        left: 0,
+        overflowY: 'auto',
+      };
 
   return (
     <Layout.Sider

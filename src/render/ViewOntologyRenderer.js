@@ -13,9 +13,23 @@ const ELEMENT_TYPES = {
       text: UI('hasText'),
     },
   },
+  Title: {
+    type: UI('Title'),
+    properties: {
+      text: UI('hasText'),
+      level: UI('hasLevel'),
+    },
+  },
   Table: {
     type: UI('Table'),
     properties: {
+      bm: UI('hasBusinessModel'),
+    },
+  },
+  Form: {
+    type: UI('Form'),
+    properties: {
+      title: UI('hasTitle'),
       bm: UI('hasBusinessModel'),
     },
   },
@@ -32,6 +46,12 @@ const ELEMENT_TYPES = {
     type: UI('Image'),
     properties: {
       metadata: UI('hasMetadata'),
+    },
+  },
+  Paragraph: {
+    type: UI('Paragraph'),
+    properties: {
+      text: UI('hasText'),
     },
   },
 };
@@ -78,17 +98,6 @@ function extractElementsOfType(store, elementType, config) {
 export async function extractUIElements(store) {
   console.log('Store has', store.statements.length, 'triples');
 
-  // Get pages (using direct match since SPARQL has issues with rdflib)
-  const pageStatements = store.statementsMatching(null, RDF('type'), UI('Page'));
-  const pages = pageStatements.map(stmt => {
-    const representation = getPropertyValue(store, stmt.subject, UI('hasGraphicRepresentation'));
-    return {
-      page: stmt.subject.value,
-      representation,
-    };
-  });
-  console.log('Pages found:', pages);
-
   // Collect all elements from each type
   const allElements = [];
 
@@ -102,7 +111,7 @@ export async function extractUIElements(store) {
   const elements = allElements.sort((a, b) => a.order - b.order);
   console.log('Sorted elements:', elements);
 
-  return { pages, elements };
+  return { elements };
 }
 
 export async function renderUI(uiOntologyUrl) {
