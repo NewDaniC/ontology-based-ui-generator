@@ -24,7 +24,7 @@ export default function MainLayout({
   } = layoutConfig || {};
 
   const contentMargins = {
-    marginLeft: sidebarWidth,
+    marginLeft: headerIsFixed ? sidebarWidth : 0,
     marginTop: headerIsFixed ? headerHeight : 0,
     marginBottom: footerIsFixed ? footerHeight : 0,
   };

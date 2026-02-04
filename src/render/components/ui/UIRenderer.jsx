@@ -1,10 +1,11 @@
-import { Typography, Divider, Spin, Alert } from 'antd';
+import { Typography, Spin, Alert } from 'antd';
 import LabelComponent from './LabelComponent';
+import TitleComponent from './TitleComponent';
 import TableComponent from './TableComponent';
-import EndpointsComponent from './EndpointsComponent';
-import PageComponent from './PageComponent';
+import FormComponent from './FormComponent';
+import ParagraphComponent from './ParagraphComponent';
 
-const { Title, Paragraph } = Typography;
+const { Paragraph } = Typography;
 
 // Component map for dynamic rendering based on element type
 const COMPONENT_MAP = {
@@ -15,12 +16,34 @@ const COMPONENT_MAP = {
       text={element.text}
     />
   ),
+  Title: ({ element }) => (
+    <TitleComponent
+      key={element.element}
+      text={element.text}
+      level={element.level}
+    />
+  ),
   Table: ({ element, apiEndpoints }) => (
     <TableComponent
       key={element.element}
       table={element.element}
       bm={element.bm}
       parameters={apiEndpoints?.parameters}
+    />
+  ),
+  Form: ({ element, apiEndpoints }) => (
+    <FormComponent
+      key={element.element}
+      form={element.element}
+      title={element.title}
+      bm={element.bm}
+      parameters={apiEndpoints?.parameters}
+    />
+  ),
+  Paragraph: ({ element }) => (
+    <ParagraphComponent
+      key={element.element}
+      text={element.text}
     />
   ),
   // Add new element types here following the pattern:
@@ -62,8 +85,11 @@ export default function UIRenderer({ uiElements, apiEndpoints, loading, error })
     return null;
   }
 
-  const { pages = [], elements = [], endpoints = [] } = uiElements;
-  const shouldRenderEndpoints = Array.isArray(endpoints) ? endpoints.length > 0 : Boolean(endpoints);
+  const { elements = [] } = uiElements;
+
+  if (elements.length === 0) {
+    return null;
+  }
 
   return (
     <div style={{
@@ -72,36 +98,7 @@ export default function UIRenderer({ uiElements, apiEndpoints, loading, error })
       borderRadius: 8,
       boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
     }}>
-      {/* Pages (containers) */}
-      {pages.length > 0 && (
-        <>
-          <Title level={3}>Pages</Title>
-          {pages.map((page, idx) => (
-            <PageComponent
-              key={idx}
-              page={page.page}
-              representation={page.representation}
-            />
-          ))}
-          <Divider />
-        </>
-      )}
-
-      {/* UI Elements - rendered in ontology-defined order */}
-      {elements.length > 0 && (
-        <>
-          {elements.map((element) => renderElement(element, apiEndpoints))}
-          <Divider />
-        </>
-      )}
-
-      {/* Endpoints */}
-      {shouldRenderEndpoints && (
-        <>
-          <Title level={3}>API Endpoints</Title>
-          <EndpointsComponent apiEndpoints={apiEndpoints} />
-        </>
-      )}
+      {elements.map((element) => renderElement(element, apiEndpoints))}
     </div>
   );
 }

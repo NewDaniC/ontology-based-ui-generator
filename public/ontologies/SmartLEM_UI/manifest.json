@@ -1,6 +1,10 @@
 {
   "views": [
     {
+      "name": "Create Energy Community",
+      "filename": "SmartLEM-CreateEC_View.ttl"
+    },
+    {
       "name": "EC View 1",
       "filename": "SmartLEM-EC_View1.ttl"
     },

@@ -13,7 +13,7 @@ export default function LabelComponent({ label, text }) {
       margin: '12px 0',
       borderRadius: '4px'
     }}>
-      <Text type="secondary" style={{ fontSize: 12 }}>{labelName}</Text>
+      <Text type="secondary" style={{ fontSize: 15 }}>{labelName}</Text>
       <Title level={4} style={{ margin: '4px 0 0 0' }}>{text}</Title>
     </div>
   );

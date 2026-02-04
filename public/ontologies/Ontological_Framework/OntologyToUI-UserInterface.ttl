@@ -48,6 +48,18 @@
 ###  http://www.cedri.com/SmartLEM-UserInterface#Label
 :Label rdf:type owl:Class .
 
+###  http://www.cedri.com/SmartLEM-UserInterface#Title
+:Title rdf:type owl:Class ;
+       rdfs:comment "A simple title component using Typography.Title from Ant Design." .
+
+###  http://www.cedri.com/SmartLEM-UserInterface#Form
+:Form rdf:type owl:Class ;
+      rdfs:comment "A form component that generates input fields based on a BusinessModel's parameters." .
+
+###  http://www.cedri.com/SmartLEM-UserInterface#Paragraph
+:Paragraph rdf:type owl:Class ;
+           rdfs:comment "A paragraph text component using Typography.Paragraph from Ant Design." .
+
 
 ###  http://www.cedri.com/SmartLEM-UserInterface#LinePlot
 :LinePlot rdf:type owl:Class ;
@@ -72,7 +84,10 @@
 :hasGraphicRepresentation rdf:type owl:ObjectProperty ;
                           rdfs:range :Graph ,
                                      :Image ,
-                                     :Label .
+                                     :Label ,
+                                     :Title ,
+                                     :Form ,
+                                     :Table .
 
 
 ###  http://www.cedri.com/SmartLEM-UserInterface#hasIndependentMetadata
@@ -92,7 +107,8 @@
              rdfs:domain :Image ,
                          :Label ,
                          :Table ,
-                         :Graph ;
+                         :Graph ,
+                         :Form ;
              rdfs:range bm:BusinessModel .
 
 
@@ -110,14 +126,24 @@
 ###  http://www.cedri.com/SmartLEM-UserInterface#hasTitle
 :hasTitle rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
-          rdfs:domain :Graph ;
+          rdfs:domain :Graph ,
+                      :Form ;
           rdfs:range xsd:string .
 
 ###  http://www.cedri.com/SmartLEM-UserInterface#hasText
 :hasText rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
-          rdfs:domain :Label ;
+          rdfs:domain :Label ,
+                      :Title ,
+                      :Paragraph ;
           rdfs:range xsd:string .
+
+###  http://www.cedri.com/SmartLEM-UserInterface#hasLevel
+:hasLevel rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Title ;
+          rdfs:range xsd:integer ;
+          rdfs:comment "The heading level (1-5) for Title component." .
 
 
 
