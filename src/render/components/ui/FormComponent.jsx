@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Card, Form, Input, InputNumber, Button, Typography, Alert, notification } from 'antd';
-import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { Card, Form, Input, InputNumber, Button, Typography, Alert, notification, Upload, DatePicker } from 'antd';
+import { CheckCircleOutlined, CloseCircleOutlined, UploadOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -18,6 +18,19 @@ function getFieldComponent(paramType, paramLabel) {
     case 'int':
     case 'integer':
       return <InputNumber style={{ width: '100%' }} step={1} placeholder={`Enter ${paramLabel}`} />;
+    case 'uploadfile':
+    case 'file':
+      return (
+        <Upload
+          beforeUpload={() => false}
+          maxCount={1}
+          accept=".json,.csv,.xml,.txt"
+        >
+          <Button icon={<UploadOutlined />}>Select File</Button>
+        </Upload>
+      );
+    case 'date':
+      return <DatePicker style={{ width: '100%' }} placeholder={`Select ${paramLabel}`} />;
     case 'str':
     case 'string':
     default:
@@ -97,24 +110,67 @@ export default function FormComponent({ form, title, bm, parameters }) {
     setLoading(true);
 
     try {
-      // Build query string from form values
+      // Build a map of param labels to their types
+      const paramTypeMap = {};
+      bmParams.forEach(p => {
+        paramTypeMap[p.label] = p.type?.toLowerCase() || 'str';
+      });
+
+      // Separate file params from query params
       const queryParams = new URLSearchParams();
+      const formData = new FormData();
+      let hasFiles = false;
+
       Object.entries(values).forEach(([key, value]) => {
-        if (value !== undefined && value !== null && value !== '') {
-          queryParams.append(key, value);
+        if (value === undefined || value === null || value === '') return;
+
+        const paramType = paramTypeMap[key];
+        const isFileType = paramType === 'uploadfile' || paramType === 'file';
+
+        if (isFileType) {
+          // File params go to FormData body
+          hasFiles = true;
+          if (Array.isArray(value) && value[0]?.originFileObj) {
+            formData.append(key, value[0].originFileObj);
+          } else if (value?.fileList?.[0]?.originFileObj) {
+            formData.append(key, value.fileList[0].originFileObj);
+          } else if (value instanceof File) {
+            formData.append(key, value);
+          }
+        } else {
+          // Non-file params go to query string
+          if (value?._d) {
+            // Handle DatePicker moment/dayjs object
+            queryParams.append(key, value.format('YYYY-MM-DD'));
+          } else {
+            queryParams.append(key, value);
+          }
         }
       });
 
-      const url = `${API_BASE_URL}${endpointPath}?${queryParams.toString()}`;
+      // Build URL with query params
+      let url = `${API_BASE_URL}${endpointPath}`;
+      const queryString = queryParams.toString();
+      if (queryString) {
+        url = `${url}?${queryString}`;
+      }
 
-      console.log('Submitting to:', url);
-
-      const response = await fetch(url, {
+      let fetchOptions = {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
         },
-      });
+      };
+
+      // Add FormData body only if there are files
+      if (hasFiles) {
+        fetchOptions.body = formData;
+        // Don't set Content-Type header - browser will set it with boundary
+      }
+
+      console.log('Submitting to:', url, hasFiles ? '(with FormData body)' : '(no body)');
+
+      const response = await fetch(url, fetchOptions);
 
       const data = await response.json();
 
@@ -181,16 +237,23 @@ export default function FormComponent({ form, title, bm, parameters }) {
         onFinish={handleSubmit}
         disabled={loading}
       >
-        {bmParams.map((param, index) => (
-          <Form.Item
-            key={index}
-            name={param.label}
-            label={param.label}
-            rules={[{ required: true, message: `Please enter ${param.label}` }]}
-          >
-            {getFieldComponent(param.type, param.label)}
-          </Form.Item>
-        ))}
+        {bmParams.map((param, index) => {
+          const paramType = param.type?.toLowerCase();
+          const isFileField = paramType === 'uploadfile' || paramType === 'file';
+
+          return (
+            <Form.Item
+              key={index}
+              name={param.label}
+              label={param.label}
+              rules={[{ required: true, message: `Please ${isFileField ? 'select' : 'enter'} ${param.label}` }]}
+              valuePropName={isFileField ? 'fileList' : 'value'}
+              getValueFromEvent={isFileField ? (e) => (Array.isArray(e) ? e : e?.fileList) : undefined}
+            >
+              {getFieldComponent(param.type, param.label)}
+            </Form.Item>
+          );
+        })}
 
         <Form.Item>
           <Button type="primary" htmlType="submit" loading={loading} block>
