@@ -122,6 +122,39 @@
                    rdfs:domain :Graph ;
                    rdfs:range xsd:string .
 
+###  http://www.cedri.com/SmartLEM-UserInterface#hasXAxisLabel
+:hasXAxisLabel rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :Graph ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Label for the X axis of a graph (e.g., 'Time', 'Date')." .
+
+###  http://www.cedri.com/SmartLEM-UserInterface#hasYAxisLabel
+:hasYAxisLabel rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :Graph ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Label for the Y axis of a graph (e.g., 'Temperature (°C)')." .
+
+###  http://www.cedri.com/SmartLEM-UserInterface#hasSeriesLabel
+:hasSeriesLabel rdf:type owl:DatatypeProperty ;
+                rdfs:domain md:Metadata ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Display label for a data series in a graph legend (e.g., 'Temperature (°C)')." .
+
+###  http://www.cedri.com/SmartLEM-UserInterface#hasSeriesAlias
+:hasSeriesAlias rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Graph ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Series alias mapping in the format '<MetadataLocalName>=<Display Label>'. Repeat the property for multiple series." .
+
+###  http://www.cedri.com/SmartLEM-UserInterface#hasJsonKey
+:hasJsonKey rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain md:Metadata ;
+            rdfs:range xsd:string ;
+            rdfs:comment "The JSON key name returned by the API for this metadata field." .
+
 
 ###  http://www.cedri.com/SmartLEM-UserInterface#hasTitle
 :hasTitle rdf:type owl:DatatypeProperty ,
