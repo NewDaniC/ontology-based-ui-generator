@@ -1,0 +1,40 @@
+@base <http://www.cedri.com/SmartLEM-SimulateEC-View#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix ui:  <http://www.cedri.com/OntologyToUI-UserInterface#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix EC_Operations: <http://www.cedri.com/SmartLEM-EC-Operations#> .
+
+@prefix view: <http://www.cedri.com/SmartLEM-SimulateEC-View#> .
+
+<http://www.cedri.com/SmartLEM-SimulateEC-View> rdf:type owl:Ontology ;
+    owl:versionIRI <http://www.cedri.com/SmartLEM-SimulateEC-View/1.0.0> ;
+    owl:imports <http://www.cedri.com/OntologyToUI-UserInterface/1.0.0> ,
+                <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                <http://www.cedri.com/SmartLEM-EC-Operations/1.0.0> ;
+    <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+    <http://purl.org/dc/terms/description> "View to simulate all assets from all members of an Energy Community" ;
+    <http://purl.org/dc/terms/issued> "2026-02-05" ;
+    <http://purl.org/dc/terms/modified> "2026-02-05" .
+
+#################################################################
+#    Individuals
+#################################################################
+
+view:PageTitle rdf:type ui:Title ;
+    ui:hasText "Simulate Energy Community" ;
+    ui:hasLevel 1 ;
+    ui:order 1 .
+
+view:DescriptionParagraph rdf:type ui:Paragraph ;
+    ui:hasText "Use this form to run a simulation for all assets from all members of an Energy Community. Provide the Energy Community ID to start the simulation." ;
+    ui:order 2 .
+
+view:SimulateECForm rdf:type ui:Form ;
+    ui:hasTitle "Simulation Parameters" ;
+    ui:hasBusinessModel EC_Operations:SimulateEnergyCommunity ;
+    ui:order 3 .
