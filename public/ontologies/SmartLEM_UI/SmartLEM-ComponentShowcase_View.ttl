@@ -1,0 +1,114 @@
+@base <http://www.cedri.com/SmartLEM-ComponentShowcase-View#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix ui:  <http://www.cedri.com/OntologyToUI-UserInterface#> .
+@prefix bm:  <http://www.cedri.com/OntologyToAPI-BusinessModel#> .
+@prefix EC_Operations: <http://www.cedri.com/SmartLEM-EC-Operations#> .
+
+@prefix view: <http://www.cedri.com/SmartLEM-ComponentShowcase-View#> .
+
+<http://www.cedri.com/SmartLEM-ComponentShowcase-View> rdf:type owl:Ontology ;
+    owl:versionIRI <http://www.cedri.com/SmartLEM-ComponentShowcase-View/1.0.0> ;
+    owl:imports <http://www.cedri.com/OntologyToUI-UserInterface/1.0.0> ,
+                <http://www.cedri.com/OntologyToAPI-BusinessModel/1.0.0> ,
+                <http://www.cedri.com/SmartLEM-EC-Operations/1.0.0> ;
+    <http://purl.org/dc/terms/creator> "https://orcid.org/0000-0002-7620-0960" ;
+    <http://purl.org/dc/terms/description> "A showcase view demonstrating all available UI components" ;
+    <http://purl.org/dc/terms/issued> "2026-02-04" ;
+    <http://purl.org/dc/terms/modified> "2026-02-04" .
+
+#################################################################
+#    Clean Component Showcase
+#################################################################
+
+view:MainTitle rdf:type ui:Title ;
+    ui:hasText "UI Components Showcase" ;
+    ui:hasLevel 1 ;
+    ui:order 1 .
+
+view:ShowcaseIntroTitle rdf:type ui:Title ;
+    ui:hasText "A clean view with one example per component (titles keep all 5 levels)." ;
+    ui:hasLevel 4 ;
+    ui:order 2 .
+
+#################################################################
+#    Title Component - all 5 levels
+#################################################################
+
+view:TitleSectionHeader rdf:type ui:Title ;
+    ui:hasText "Title Component (5 Levels)" ;
+    ui:hasLevel 2 ;
+    ui:order 3 .
+
+view:TitleLevel1Example rdf:type ui:Title ;
+    ui:hasText "Level 1 Title" ;
+    ui:hasLevel 1 ;
+    ui:order 4 .
+
+view:TitleLevel2Example rdf:type ui:Title ;
+    ui:hasText "Level 2 Title" ;
+    ui:hasLevel 2 ;
+    ui:order 5 .
+
+view:TitleLevel3Example rdf:type ui:Title ;
+    ui:hasText "Level 3 Title" ;
+    ui:hasLevel 3 ;
+    ui:order 6 .
+
+view:TitleLevel4Example rdf:type ui:Title ;
+    ui:hasText "Level 4 Title" ;
+    ui:hasLevel 4 ;
+    ui:order 7 .
+
+view:TitleLevel5Example rdf:type ui:Title ;
+    ui:hasText "Level 5 Title" ;
+    ui:hasLevel 5 ;
+    ui:order 8 .
+
+#################################################################
+#    Paragraph Component - one example
+#################################################################
+
+view:ParagraphSectionHeader rdf:type ui:Title ;
+    ui:hasText "Paragraph Component" ;
+    ui:hasLevel 2 ;
+    ui:order 9 .
+
+view:ParagraphExample rdf:type ui:Paragraph ;
+    ui:hasText "This single paragraph demonstrates long-form text rendering, spacing, and wrapping behavior in the ontology-based UI." ;
+    ui:order 10 .
+
+view:ParagraphExampleLoren rdf:type ui:Paragraph ;
+    ui:hasText "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan mollis cursus. Maecenas eu nunc lectus. Suspendisse condimentum eros sed ligula hendrerit cursus. Maecenas congue id sapien commodo ultricies. Nullam id libero feugiat, rutrum orci vitae, bibendum lorem. Proin sed eros arcu. Pellentesque tempor mauris risus, quis accumsan nisl rhoncus et. Proin orci est, venenatis a dapibus et, tincidunt nec dolor. Aenean porta justo id massa molestie pretium. Praesent accumsan sollicitudin dignissim. Phasellus sed ipsum fermentum, varius justo a, rutrum nisl. Aliquam erat volutpat. Vivamus accumsan metus quis felis sagittis dictum. Proin feugiat turpis nec finibus eleifend. Curabitur non justo ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;" ;
+    ui:order 11 .
+    
+
+#################################################################
+#    Label Component - one example
+#################################################################
+
+view:LabelSectionHeader rdf:type ui:Title ;
+    ui:hasText "Label Component" ;
+    ui:hasLevel 2 ;
+    ui:order 12 .
+
+view:ImportantNoticeLabel rdf:type ui:Label ;
+    ui:hasText "System status: component showcase is active and rendering ontology-defined UI elements." ;
+    ui:order 13 .
+
+#################################################################
+#    Table Component - one example
+#################################################################
+
+view:TableSectionHeader rdf:type ui:Title ;
+    ui:hasText "Table Component" ;
+    ui:hasLevel 2 ;
+    ui:order 14 .
+
+view:BusinessModelParametersTable rdf:type ui:Table ;
+    ui:hasBusinessModel EC_Operations:CreateEnergyCommunity ;
+    ui:order 15 .
