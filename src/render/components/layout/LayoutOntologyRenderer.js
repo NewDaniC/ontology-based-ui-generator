@@ -124,9 +124,6 @@ export async function discoverViews(baseDir = '/ontologies/SmartLEM_UI/') {
       });
     }
 
-    // Sort views alphabetically by name
-    views.sort((a, b) => a.name.localeCompare(b.name));
-
   console.log('Views discovered from manifest:', views); // Console comment
     return views;
   } catch (error) {

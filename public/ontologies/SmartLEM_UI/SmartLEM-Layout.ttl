@@ -96,7 +96,7 @@ layout:SmartLEM_Layout rdf:type layout:Layout ;
 layout:SmartLEM_Header rdf:type layout:Header ;
     layout:hasTitle "SmartLEM" ;
     layout:hasHeight 64 ;
-    layout:isFixed true .
+    layout:isFixed false .
 
 layout:SmartLEM_Sidebar rdf:type layout:Sidebar ;
     layout:hasWidth 250 .
@@ -108,3 +108,5 @@ layout:SmartLEM_Footer rdf:type layout:Footer ;
 
 layout:SmartLEM_ContentArea rdf:type layout:ContentArea ;
     layout:hasPadding 24 . 
+
+# Definir a ordem aqui - das ontologias
