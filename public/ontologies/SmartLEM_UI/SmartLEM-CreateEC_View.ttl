@@ -30,15 +30,11 @@ view:PageTitle rdf:type ui:Title ;
     ui:hasLevel 1 ;
     ui:order 1 .
 
-view:DescriptionLabel rdf:type ui:Label ;
-    ui:hasText "Fill in the form below to create a new Local Electricity Market community." ;
+view:DescriptionParagraph rdf:type ui:Paragraph ;
+    ui:hasText "Use this form to create a new Energy Community, which operates as a Local Electricity Market. Fill in the community name, geographic coordinates (Latitude and Longitude), the Time of Use rate (TOU), and the Feed-in Tariff (FIT)." ;
     ui:order 2 .
 
 view:CreateECForm rdf:type ui:Form ;
     ui:hasTitle "Energy Community Details" ;
     ui:hasBusinessModel EC_Operations:CreateEnergyCommunity ;
     ui:order 3 .
-
-view:DescriptionParagraph rdf:type ui:Paragraph ;
-    ui:hasText "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacinia dui ut tincidunt porta. Nullam laoreet, nunc et dictum dapibus, diam enim cursus felis, at mollis nisl tortor vel justo. Nam quis orci eget dolor rhoncus pellentesque vitae vulputate leo. Nam ultricies metus nec tortor faucibus, ornare dignissim tellus volutpat. Nam sagittis justo ac tortor porttitor imperdiet. Nam dignissim leo et suscipit rhoncus. Phasellus mollis tristique est, ac bibendum ipsum interdum sit amet. Aenean vulputate pellentesque justo eu pharetra." ;
-    ui:order 4 .
