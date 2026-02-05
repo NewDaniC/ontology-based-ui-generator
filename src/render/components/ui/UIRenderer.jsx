@@ -4,6 +4,7 @@ import TitleComponent from './TitleComponent';
 import TableComponent from './TableComponent';
 import FormComponent from './FormComponent';
 import ParagraphComponent from './ParagraphComponent';
+import GraphComponent from './GraphComponent';
 
 const { Paragraph } = Typography;
 
@@ -44,6 +45,22 @@ const COMPONENT_MAP = {
     <ParagraphComponent
       key={element.element}
       text={element.text}
+    />
+  ),
+  Graph: ({ element, apiEndpoints }) => (
+    <GraphComponent
+      key={element.element}
+      graph={element.element}
+      title={element.title}
+      graphType={element.graphType}
+      bm={element.bm}
+      xAxis={element.independentMetadata}
+      yAxes={element.dependentMetadata}
+      seriesAliases={element.seriesAliases}
+      xAxisLabel={element.xAxisLabel}
+      yAxisLabel={element.yAxisLabel}
+      legendPosition={element.legendPosition}
+      parameters={apiEndpoints?.parameters}
     />
   ),
   // Add new element types here following the pattern:
